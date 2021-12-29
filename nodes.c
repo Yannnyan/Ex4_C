@@ -2,34 +2,42 @@
 #include <stdio.h>
 #include "graph.h"
 
-// if malloc costs O(n), then the time complexity is O(n^2)
-void append(GRAPH_NODE_ **nodesArray, GRAPH_NODE_ * node){
-    nodesArray = realloc(nodesArray, (size(nodesArray) + 1)* sizeof(GRAPH_NODE_)));
-    nodesArray[size(nodesArray)] = node;
+
+size_t size_ = 100;
+
+// if malloc costs O(n)
+// The idea of this is to create an array, that contains Nodes which assigned by their ids 
+int insert(pnode nodesArray, pnode pnode1){
+    if(pnode1 == NULL || nodesArray == NULL){
+        return 0;
+    }
+    int id_node = pnode1->node_num
+    if(size_ < id_node ){
+        nodesArray = (pnode)realloc(nodesArray, (id_node + 100) * sizeof(node));
+        size_+=100;
+    }
+    // Freeing all the current edges of the node
+    if(nodesArray[id_node] != NULL){
+        pedge curr_pedge = nodesArray[id_node] -> edges;
+        while(curr_pedge != NULL){
+            free(curr_pedge);
+        }
+        free(nodesArray[id_node]);
+    }
+    nodesArray[id_node] = pnode1;
+    return 1;
 }
 // returns the size of the given node array
-size_t size(GRAPH_NODE_ *nodesArray){
-    return ( sizeof(nodesArray) / sizeof(nodesArray[0]) );
+size_t size(){
+    return size_;
 }
-// deletes and returns the node at last index
-// return node pointer if the deletion is successfull, else return NULL
-GRAPH_NODE_ * pop(GRAPH_NODE_ ** nodesArray){
-    
-    size_t pastLength = size(nodesArray)
-    if(pastLength == 0){
-        return NULL;
+// receives a linked list of nodes and translates it to an array
+pnode makeArray(pnode head){
+    pnode nodes = (pnode) malloc(100 * sizeof(pnode));
+    pnode curr = head;
+    while(curr != NULL){
+        insert(nodes,curr);
+        curr->next;
     }
-    GRAPH_NODE_ node = nodesArray[size(nodesArray) - 1]
-    realloc(nodesArray, (size(nodesArray) - 1) * sizeof(GRAPH_NODE_))
-    if(size(nodesArray) == pastLength - 1){
-        return node;
-    }
-    else{
-        return NULL;
-    }
+    return nodes;
 }
-// if u want to remove from the top of the array use pop ONLY
-// else remove manually
-
-
-
