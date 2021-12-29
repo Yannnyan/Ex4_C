@@ -8,15 +8,7 @@ void build_graph_cmd(pnode *head){
 
 
 }
-void insert_node_cmd(pnode *head){
 
-
-
-}
-void delete_node_cmd(pnode *head){
-
-
-}
 void printGraph_cmd(pnode head){
 
 

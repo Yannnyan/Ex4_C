@@ -2,42 +2,34 @@
 #include <stdio.h>
 #include "graph.h"
 
-
-size_t size_ = 100;
-
-// if malloc costs O(n)
-// The idea of this is to create an array, that contains Nodes which assigned by their ids 
-int insert(pnode nodesArray, pnode pnode1){
-    if(pnode1 == NULL || nodesArray == NULL){
+void insert_node_cmd(pnode *head){
+    char id;
+    if(scanf("%d", &id) == 0){
         return 0;
     }
-    int id_node = pnode1->node_num
-    if(size_ < id_node ){
-        nodesArray = (pnode)realloc(nodesArray, (id_node + 100) * sizeof(node));
-        size_+=100;
-    }
-    // Freeing all the current edges of the node
-    if(nodesArray[id_node] != NULL){
-        pedge curr_pedge = nodesArray[id_node] -> edges;
-        while(curr_pedge != NULL){
-            free(curr_pedge);
+    pnode next_node = head, current_nod = next_node;
+    while(next_nod != (pnode)NULL){
+        // if got an id with the same as the id from the file
+        if(next_node->node_num == id){
+            pedge current_edge = next_nod->edges;
+            while(current_edge != (pedge)NULL){
+                free(current_edge);
+            }
+            next_node->edges = (pedge)NULL;
+            return 1;
         }
-        free(nodesArray[id_node]);
+        current_nod = current_nod->next;
     }
-    nodesArray[id_node] = pnode1;
+    current_nod = (pnode) malloc(sizeof(node));
+    current_nod->node_num = id;
     return 1;
 }
-// returns the size of the given node array
-size_t size(){
-    return size_;
+void delete_node_cmd(pnode *head){
+
+
 }
-// receives a linked list of nodes and translates it to an array
-pnode makeArray(pnode head){
-    pnode nodes = (pnode) malloc(100 * sizeof(pnode));
-    pnode curr = head;
-    while(curr != NULL){
-        insert(nodes,curr);
-        curr->next;
-    }
-    return nodes;
+
+
+int main(){
+    return 0;
 }
