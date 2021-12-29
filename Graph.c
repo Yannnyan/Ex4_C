@@ -28,3 +28,7 @@ void TSP_cmd(pnode head){
 
 
 }
+
+int main(){
+    return 0;
+}

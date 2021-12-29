@@ -1,53 +1,46 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "graph.h"
+typedef enum bool {
+    True=1,
+    False=0
+}bool;
 
-int main(){
-    int true = 1;
-    while(true){
-        char c;
-        scanf("%c",&c);
-        if(c == 'A'){
-            scanf("%c", &c);
-            size_t size_graph;
-            // initialize the graph
-            while(c != 'A' && c != 'B' && c != 'D' && c != 'S' && c != 'T'){
-                
-               
+    int main(){
+    bool flag = True;
+    bool graph_exist = False;
+    char func='0';
+    pnode * head;
+    while(flag){
+        func=getchar();
+        if (func=='A'){
+            if(graph_exist){
+                head = getHead();
+                deleteGraph_cmd(head);
             }
-            build_graph_cmd();
-            // 1) if a graph exists then delete it
-            // 2) receive new Graph and make it
-            
-            /* Notes:
-                if user types n then it gets one argument id and then it gets weight details (destID,Weight)
-                a user may insert few edges that go out of a node each should be specified with a weight
-                
-            */    
+            head = (pnode *) malloc(sizeof(node));
+            build_graph_cmd(head);
+            graph_exist=True;
+        }else if(func=='B'){
+            head = getHead();
+            insert_node_cmd(head);
+        }else if(func=='D'){
+            head = getHead();
+            delete_node_cmd(head);
+        }else if(func=='S'){
+            head = getHead();
+            shortsPath_cmd((*head));
+        }else if(func=='T'){
+            head = getHead();
+            TSP_cmd((*head));
         }
-        if(c == 'B'){
-            
-            
-
-
-
+        /*
+        else {
+            printGraph_cmd();
         }
-        if (c == 'D'){
-
-
-        }
-        if (c == 'S'){
-
-        }
-        if (c == 'T'){
-
-
-        }
-
-
+        */
     }
-
-
 }
+
 
 
