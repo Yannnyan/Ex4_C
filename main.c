@@ -1,53 +1,35 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "graph.h"
+typedef enum bool {
+    True=1,
+    False=0
+}bool;
 
 int main(){
-    int true = 1;
-    while(true){
-        char c;
-        scanf("%c",&c);
-        if(c == 'A'){
-            scanf("%c", &c);
-            size_t size_graph;
-            // initialize the graph
-            while(c != 'A' && c != 'B' && c != 'D' && c != 'S' && c != 'T'){
-                
-               
+    bool flag=True;
+    bool graph_exist=False;
+    char func='0';
+    while(flag){
+        func=getchar();
+        if (func=='A'){
+            if(graph_exist){
+                deleteGraph_cmd();
             }
             build_graph_cmd();
-            // 1) if a graph exists then delete it
-            // 2) receive new Graph and make it
-            
-            /* Notes:
-                if user types n then it gets one argument id and then it gets weight details (destID,Weight)
-                a user may insert few edges that go out of a node each should be specified with a weight
-                
-            */    
+            graph_exist=True;
+        }else if(func=='B'){
+            insert_node_cmd();
+        }else if(func=='D'){
+            delete_node_cmd();
+        }else if(func=='S'){
+            shortsPath_cmd();
+        }else if(func=='T'){
+            TSP_cmd();
+        }else {
+            printGraph_cmd();
         }
-        if(c == 'B'){
-            
-            
-
-
-
-        }
-        if (c == 'D'){
-
-
-        }
-        if (c == 'S'){
-
-        }
-        if (c == 'T'){
-
-
-        }
-
-
     }
-
-
 }
 
 

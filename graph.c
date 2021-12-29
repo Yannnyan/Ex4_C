@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graph.h"
-
+typedef enum bool {
+    True=1,
+    False=0
+}bool;
 
 void build_graph_cmd(pnode *head){
     

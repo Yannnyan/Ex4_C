@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Graph.h"
+#include "graph.h"
 
 int insert_edge(pnode head){
     int weight, destID;
