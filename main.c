@@ -8,13 +8,15 @@ typedef enum bool {
 
 
 int main(){
+printf("Starting program!\n");
 bool flag = True;
 bool graph_exist = False;
 char func='0';
 pnode * head;
-while(flag){
+while(func != EOF){
     func=getchar();
     if (func=='A'){
+        printf("Got an A\n");
         if(graph_exist){
             head = getHead();
             deleteGraph_cmd(head);
@@ -37,6 +39,10 @@ while(flag){
     }
     else if(func == 'Q'){
         head = getHead();
+        if(head == (pnode *) NULL){
+            printf("head is null !");
+            return 0;
+        }
         printGraph_cmd(*head);
         return 1;
     }
