@@ -2,12 +2,8 @@
 #include <stdlib.h>
 #include "graph.h"
 
-int insert_edge(pnode *head){
-    int weight;int destID;
+int insert_edge(pnode *head, int destID, int weight){
     pnode *dest;
-    if(scanf("%d", &destID) == 0){
-        return 0;
-    }
     dest = head;
     while(dest != (pnode *)NULL){
         if((*dest)->node_num == destID){
@@ -18,9 +14,6 @@ int insert_edge(pnode *head){
     // trying to connect to unresolved node
     if( dest == (pnode *)NULL){
         return 1;
-    }
-    if(scanf("%d", &weight) == 0){
-        return 0;
     }
     pedge *current_edge = &((*dest)->edges);
     while( current_edge != (pedge *) NULL){

@@ -7,11 +7,16 @@ void build_graph_cmd(pnode *head){
     char next;
     int flag = 1;
     while(flag){
-        if(next == 'n'){
-            insert_node_cmd(head);
-            
+        // end of file then exit
+        if(scanf("%c", &next) == EOF){
+            break;
         }
-
+        if(next == 'n'){
+            insert_node_cmd(head);  
+        }
+        if(next != 'n' && 'A' <= next && next <= 'Z' ){
+            flag = 0;
+        }
 
     }    
 

@@ -11,9 +11,12 @@ void insert_node_cmd(pnode *head){
     if(scanf("%d", &id) == 0){
         printf("Failed to scan");
     }
+    printf("next_node = head\n");
     pnode *next_node = head;
     pnode *current_nod = next_node;
+    printf("first loop\n");
     while(next_node != (pnode *)NULL){
+        printf("iteration\n");
         // if got an id with the same as the id from the file
         // override it
         if((*next_node)->node_num == id){
@@ -21,17 +24,28 @@ void insert_node_cmd(pnode *head){
             delete_all_edges(next_node);
             return;
         }
+        printf("curr->next\n");
         (*current_nod) = (*current_nod)->next;
     }
+    printf("malloc\n");
     (*current_nod) = (pnode) malloc(sizeof(pnode));
     (*current_nod)->node_num = id;
     (*current_nod)->next = (pnode) NULL;
     (*current_nod)->edges = (pedge) NULL;
-    printf("helo");
+    printf("inserting edges");
+    // inserting edges
+    int dest, weight;
+    while(scanf("%d",&dest) == 1){
+        if(scanf("%d",&weight) == 0){
+            break;
+        }
+        insert_edge(getHead(),dest,weight);
+    }
     if(HEAD == (pnode *) NULL){
         printf("updating HEAD!");
         HEAD = current_nod;
     }
+    
 }
 void delete_node_cmd(pnode *head){
     if(size == 0){
