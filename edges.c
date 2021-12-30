@@ -35,7 +35,10 @@ int insert_edge(pnode *head){
     (*current_edge)->endpoint = (*dest);
     return 1;
 }
-
+/*
+receive a pointer to a pnode, then remove all its edges by freeing the memory its using
+lastly assigning the pnode edges pointer to null
+*/
 void delete_all_edges(pnode *head){
     pedge  * next_edge= &((*head)->edges), *current_edge;
     current_edge =  next_edge;
@@ -44,10 +47,5 @@ void delete_all_edges(pnode *head){
         free(current_edge);
         current_edge = next_edge;
     }
-}
-
-int main(){
-
-    return 0;
-
+    (*head)->edges = (pedge) NULL;
 }
