@@ -3,7 +3,7 @@
 #include "graph.h"
 
 
-pnode * HEAD;
+pnode * HEAD = (pnode *) NULL;
 int size = 0;
 void insert_node_cmd(pnode *head){
     printf("insert_node_cmd\n");
@@ -15,34 +15,38 @@ void insert_node_cmd(pnode *head){
     pnode *next_node = head;
     pnode *current_nod = next_node;
     printf("first loop\n");
-    while(next_node != (pnode *)NULL){
+    while((*next_node) != (pnode)NULL){
         printf("iteration\n");
         // if got an id with the same as the id from the file
         // override it
-        if((*next_node)->node_num == id){
-            printf("Deleting all the edges\n");
-            delete_all_edges(next_node);
-            return;
-        }
+        // if((*next_node)->node_num == id){
+        //     printf("Deleting all the edges\n");
+        //     delete_all_edges(next_node);
+        //     return;
+        // }
         printf("curr->next\n");
         (*current_nod) = (*current_nod)->next;
     }
-    printf("malloc\n");
+    printf("malloc new node\n");
     (*current_nod) = (pnode) malloc(sizeof(pnode));
     (*current_nod)->node_num = id;
     (*current_nod)->next = (pnode) NULL;
+    (*current_nod)->edges = (pedge) malloc(sizeof(edge));
     (*current_nod)->edges = (pedge) NULL;
-    printf("inserting edges");
+    printf("inserting edges\n");
     // inserting edges
-    int dest, weight;
-    while(scanf("%d",&dest) == 1){
+    int dest, weight, flag;
+
+    while( (flag = scanf("%d",&dest)) == 1){
+        printf("scanf returned %d\n", flag); 
         if(scanf("%d",&weight) == 0){
             break;
         }
-        insert_edge(getHead(),dest,weight);
+        insert_edge(getHead(),current_nod,dest,weight);
     }
+    printf("Inserting to head\n");
     if(HEAD == (pnode *) NULL){
-        printf("updating HEAD!");
+        printf("updating HEAD!\n");
         HEAD = current_nod;
     }
     

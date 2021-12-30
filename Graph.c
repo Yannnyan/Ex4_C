@@ -15,6 +15,7 @@ void build_graph_cmd(pnode *head){
             insert_node_cmd(head);  
         }
         if(next != 'n' && 'A' <= next && next <= 'Z' ){
+            ungetc(next,stdin);
             flag = 0;
         }
 
@@ -24,14 +25,14 @@ void build_graph_cmd(pnode *head){
 }
 
 void printGraph_cmd(pnode head){
-    printf("printGraph_cmd");
+    printf("printGraph_cmd\n");
     if(head == (pnode) NULL){
         return;
     }
     pnode * current_node = &head;
-    printf("Starting to Print!");
+    printf("Starting to Print!\n");
     while(*current_node != (pnode) NULL){
-        printf("%d", (*current_node)->node_num);
+        printf("%d\n", (*current_node)->node_num);
         current_node = &(*current_node)->next;
     }    
 }

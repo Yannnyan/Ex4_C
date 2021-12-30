@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include "graph.h"
 
-int insert_edge(pnode *head, int destID, int weight){
+int insert_edge(pnode *head, pnode * current_node, int destID, int weight){
     pnode *dest;
     dest = head;
-    while(dest != (pnode *)NULL){
+    printf("trying to get id on node\n");
+    while((*dest) != (pnode)NULL){
         if((*dest)->node_num == destID){
             break;
         }
@@ -15,15 +16,35 @@ int insert_edge(pnode *head, int destID, int weight){
     if( dest == (pnode *)NULL){
         return 1;
     }
-    pedge *current_edge = &((*dest)->edges);
-    while( current_edge != (pedge *) NULL){
-        // if the edge allready exists then update its weight and return
-        if( (*current_edge)->endpoint->node_num == (*dest)->node_num){
-            (*current_edge)->weight = weight;
+    printf("trying to allocate memory for edge\n");
+    // allocated memory in space if current_node doesnt have any edges
+    if((*current_node)->edges == (pedge) NULL){
+        printf("trying to malloc\n");
+        //(*current_node)->edges = (pedge) malloc(sizeof(pedge));
+        // (*current_node)->edges = (pedge) NULL;
+        //(*current_node)->edges->endpoint = (pnode) NULL;
+    }
+    printf("trying to assign edge\n");
+    printf("first iteration!\n");
+    pedge *next_edge = &((*current_node)->edges);
+    pedge * current_edge = next_edge;
+    while( (*next_edge) != (pedge) NULL){
+        //if the edge allready exists then update its weight and return
+        if( (*next_edge)->endpoint != (pnode) NULL)
+        if( (*next_edge)->endpoint->node_num == (*dest)->node_num){
+            printf("already have this edge!\n");
+            (*next_edge)->weight = weight;
             return 1;
         }
-        current_edge = &((*current_edge)->next);
+        printf("HELLOW\n");
+        current_edge = next_edge;
+        if((*next_edge)->next != (edge *) NULL){
+        printf("next edge is not NULL!\n");
+        (*next_edge) = (*next_edge)->next;
+        }
     }
+    (*current_edge)->next = (pedge)malloc(sizeof(pedge));
+    (*current_edge) = (*current_edge)->next;
     (*current_edge)->weight = weight;
     (*current_edge)->endpoint = (*dest);
     return 1;

@@ -3,11 +3,14 @@
 
 
 int main(){
-    int id;
-    char x;
-    printf("%d\n",scanf("%d", &id));
-    printf("%d\n",scanf("%c", &x));
-    printf("%c",x);
+    char nextChar;
+    while(scanf("%c",&nextChar) != EOF){
+    printf("%c",nextChar);
+    }
+    ungetc(nextChar,stdin);
+    ungetc('Q', stdin);
+    scanf("%c", &nextChar);
+    printf("%c",nextChar);
 
 
 }

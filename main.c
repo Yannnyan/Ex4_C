@@ -6,7 +6,6 @@ typedef enum bool {
     False=0
 }bool;
 
-
 int main(){
 printf("Starting program!\n");
 bool graph_exist = False;
@@ -42,7 +41,7 @@ while(func != EOF){
     else if(func == 'Q'){
         head = *getHead();
         if(head == (pnode) NULL){
-            printf("head is null !");
+            printf("head is null !\n");
             return 0;
         }
         printGraph_cmd(head);
