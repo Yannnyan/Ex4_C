@@ -40,10 +40,11 @@ void insert_node_cmd(pnode *head){
     }
 
 
-    printf("inserting edges:\n");
+    
     int weight, destID;
     while(scanf("%d",&destID)){
         scanf("%d",&weight);
+        printf("inserting edges:\n");
         insert_edge(HEAD,current_node->next,destID,weight);
     }
 

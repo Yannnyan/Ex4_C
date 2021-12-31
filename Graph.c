@@ -44,9 +44,10 @@ void printGraph_cmd(pnode head){
         current_edge = current_node->edges;
         while(current_edge != (pedge)NULL){
             printf("edge %d", count++);
-            printf(" w: %d, dest: %d ", current_edge->weight, current_edge->endpoint->node_num);
+            printf(" w: %d, dest: %d \n", current_edge->weight, current_edge->endpoint->node_num);
             current_edge = current_edge->next;
         }
+        count = 0;
         current_node = (current_node)->next;
     }    
 }
