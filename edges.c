@@ -22,6 +22,7 @@ int insert_edge(pnode head, pnode current_node, int destID, int weight){
         current_node->edges->endpoint = head;
         current_node->edges->weight = weight;
         current_node->edges->next = (pedge)NULL;
+        return 1;
     }
     pedge current_edge, next_edge;
     next_edge = current_node->edges;
@@ -34,7 +35,7 @@ int insert_edge(pnode head, pnode current_node, int destID, int weight){
     current_edge->next->endpoint = head;
     current_edge->next->weight = weight;
     current_edge->next->next = (pedge)NULL;
-    return 0;
+    return 1;
 }
 /*
 receive a pointer to a pnode, then remove all its edges by freeing the memory its using

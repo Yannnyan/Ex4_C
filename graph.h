@@ -29,4 +29,5 @@ int size_nodes();
 void delete_all_edges(pnode head);
 int insert_edge(pnode head,pnode current_node , int dest, int weight);
 void set_size(int s);
+void create_list();
 #endif

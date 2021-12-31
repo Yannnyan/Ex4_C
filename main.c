@@ -19,10 +19,6 @@ while(func != EOF){
             head = getHead();
             deleteGraph_cmd(&head);
         }
-        head = (pnode) malloc(sizeof(node));
-        head->node_num = -1;
-        head->next = (pnode) NULL;
-        head->edges = (pedge) NULL;
         build_graph_cmd(&head);
         graph_exist=True;
     }else if(func=='B'){

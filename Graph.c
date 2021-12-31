@@ -9,6 +9,7 @@ void build_graph_cmd(pnode *head){
     int size;
     scanf("%d",&size);
     set_size(size);
+    create_list();
     while(flag){
         // end of file then exit
         if(scanf("%c", &next) == EOF){
@@ -16,7 +17,8 @@ void build_graph_cmd(pnode *head){
         }
         if(next == 'n'){
             printf("got n:\n");
-            insert_node_cmd(head);  
+            pnode head = getHead();
+            insert_node_cmd(&head);  
         }
         if(next != 'n' && 'A' <= next && next <= 'Z' ){
             ungetc(next,stdin);
@@ -33,11 +35,19 @@ void printGraph_cmd(pnode head){
     if(head == (pnode) NULL){
         return;
     }
-    pnode * current_node = &head;
+    pnode current_node = head;
+    pedge current_edge;
+    int count=0;
     printf("Starting to Print!\n");
-    while(*current_node != (pnode) NULL){
-        printf("%d\n", (*current_node)->node_num);
-        current_node = &(*current_node)->next;
+    while(current_node != (pnode) NULL){
+        printf("current node: %d\n", (current_node)->node_num);
+        current_edge = current_node->edges;
+        while(current_edge != (pedge)NULL){
+            printf("edge %d", count++);
+            printf(" w: %d, dest: %d ", current_edge->weight, current_edge->endpoint->node_num);
+            current_edge = current_edge->next;
+        }
+        current_node = (current_node)->next;
     }    
 }
 void deleteGraph_cmd(pnode* head){
