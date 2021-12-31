@@ -16,30 +16,30 @@ while(func != EOF){
     if (func=='A'){
         printf("Got an A\n");
         if(graph_exist){
-            head = *getHead();
+            head = getHead();
             deleteGraph_cmd(&head);
         }
-        head = (pnode) malloc(sizeof(pnode));
+        head = (pnode) malloc(sizeof(node));
         head->node_num = -1;
         head->next = (pnode) NULL;
         head->edges = (pedge) NULL;
         build_graph_cmd(&head);
         graph_exist=True;
     }else if(func=='B'){
-        head = *getHead();
+        head = getHead();
         insert_node_cmd(&head);
     }else if(func=='D'){
-        head = *getHead();
+        head = getHead();
         delete_node_cmd(&head);
     }else if(func=='S'){
-        head = *getHead();
+        head = getHead();
         shortsPath_cmd(head);
     }else if(func=='T'){
-        head = *getHead();
+        head = getHead();
         TSP_cmd(head);
     }
     else if(func == 'Q'){
-        head = *getHead();
+        head = getHead();
         if(head == (pnode) NULL){
             printf("head is null !\n");
             return 0;

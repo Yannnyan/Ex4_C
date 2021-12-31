@@ -24,9 +24,9 @@ void deleteGraph_cmd(pnode* head);
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
 
-pnode *getHead();
+pnode getHead();
 int size_nodes();
-void delete_all_edges(pnode *head);
-int insert_edge(pnode *head,pnode *current_node , int dest, int weight);
-
+void delete_all_edges(pnode head);
+int insert_edge(pnode head,pnode current_node , int dest, int weight);
+void set_size(int s);
 #endif
