@@ -24,9 +24,13 @@ while(func != EOF){
     }else if(func=='B'){
         head = getHead();
         insert_node_cmd(&head);
+        
     }else if(func=='D'){
         head = getHead();
+        printGraph_cmd(head);
         delete_node_cmd(&head);
+        head = getHead();
+        printGraph_cmd(head);
     }else if(func=='S'){
         head = getHead();
         shortsPath_cmd(head);

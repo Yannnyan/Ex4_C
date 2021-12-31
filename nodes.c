@@ -39,21 +39,18 @@ void insert_edges_to_node(pnode *head){
         current_node = next_node;
         next_node = next_node->next;
     }
+    printf("%d\n",current_node->node_num);
+    printf("%d\n",id);
 
-
-    
-    int weight, destID;
-    while(scanf("%d",&destID)){
-        scanf("%d",&weight);
-        printf("inserting edges:\n");
-        insert_edge(HEAD,current_node->next,destID,weight);
-    }
-
+    printf("inserting edges:\n");
+    if(current_node->node_num == id) insert_edge(HEAD,current_node);
+    else insert_edge(HEAD,current_node->next);
 }
 
 void insert_node_cmd(pnode *head){
     pnode current_node, next_node;
     current_node = *head;
+   
     next_node = current_node;
     while(next_node != (pnode)NULL){
         current_node = next_node;
@@ -66,12 +63,8 @@ void insert_node_cmd(pnode *head){
     size+=1;
 
 
-    int weight, destID;
-    while(scanf("%d",&destID)){
-        scanf("%d",&weight);
-        printf("inserting edges:\n");
-        insert_edge(HEAD,current_node->next,destID,weight);
-    }
+    insert_edge(HEAD,current_node->next);
+    
 }
 void delete_node_cmd(pnode *head){
     if(size == 0){
@@ -79,7 +72,26 @@ void delete_node_cmd(pnode *head){
         return;
     }
     size -=1;
-    delete_all_edges(*head);
+    printf("deleting all the edges\n");
+    int id = delete_all_edges(*head);
+    printf("deleting the node\n");
+    pnode current_node = HEAD, last_node;
+    if(HEAD->node_num == id){
+        HEAD = HEAD->next;
+        free(current_node);
+        return;
+    }
+    
+    last_node = current_node;
+    current_node = current_node->next;
+    while(current_node != (pnode)NULL){
+        if(current_node->node_num == id){
+            last_node -> next = current_node ->next;
+            free(current_node);
+        }
+        last_node = current_node;
+        current_node = current_node->next;
+    }
 }
 int size_nodes(){
     return size;

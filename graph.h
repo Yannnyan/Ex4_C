@@ -26,8 +26,8 @@ void TSP_cmd(pnode head);
 
 pnode getHead();
 int size_nodes();
-void delete_all_edges(pnode head);
-int insert_edge(pnode head,pnode current_node , int dest, int weight);
+int delete_all_edges(pnode head);
+int insert_edge(pnode head,pnode current_node);
 void insert_edges_to_node(pnode * head);
 void set_size(int s);
 void create_list();
