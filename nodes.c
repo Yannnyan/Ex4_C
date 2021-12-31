@@ -17,6 +17,7 @@ void create_list(){
     pnode current_node = HEAD;
     for(int i=1; i< size; i++){
        current_node->next = (pnode) malloc(sizeof(node));
+       current_node->next->next = (pnode)NULL;
        current_node->next->edges = (pedge)NULL;
        current_node->next->node_num = i;
        current_node = current_node->next;
@@ -51,8 +52,26 @@ void insert_edges_to_node(pnode *head){
 }
 
 void insert_node_cmd(pnode *head){
+    pnode current_node, next_node;
+    current_node = *head;
+    next_node = current_node;
+    while(next_node != (pnode)NULL){
+        current_node = next_node;
+        next_node = next_node->next;
+    }
+    current_node->next = (pnode) malloc(sizeof(node));
+    scanf("%d", &current_node->next->node_num);
+    current_node->next->edges = (pedge)NULL;
+    current_node->next->next = (pnode)NULL;
+    size+=1;
 
 
+    int weight, destID;
+    while(scanf("%d",&destID)){
+        scanf("%d",&weight);
+        printf("inserting edges:\n");
+        insert_edge(HEAD,current_node->next,destID,weight);
+    }
 }
 void delete_node_cmd(pnode *head){
     if(size == 0){
