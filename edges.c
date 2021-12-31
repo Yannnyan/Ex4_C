@@ -28,6 +28,10 @@ int insert_edge(pnode head, pnode current_node, int destID, int weight){
     next_edge = current_node->edges;
     current_edge = next_edge;
     while(next_edge != (pedge)NULL){
+        if(next_edge->endpoint->node_num == destID){
+            next_edge->weight = weight;
+            return 1;
+        }
         current_edge = next_edge;
         next_edge = next_edge->next;
     }

@@ -18,7 +18,7 @@ void build_graph_cmd(pnode *head){
         if(next == 'n'){
             printf("got n:\n");
             pnode head = getHead();
-            insert_node_cmd(&head);  
+            insert_edges_to_node(&head);  
         }
         if(next != 'n' && 'A' <= next && next <= 'Z' ){
             ungetc(next,stdin);

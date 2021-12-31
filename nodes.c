@@ -23,7 +23,7 @@ void create_list(){
     }
 }
 
-void insert_node_cmd(pnode *head){
+void insert_edges_to_node(pnode *head){
     printf("getting node:\n");
     int id;
     // the first node does not have any edges!
@@ -47,6 +47,11 @@ void insert_node_cmd(pnode *head){
         printf("inserting edges:\n");
         insert_edge(HEAD,current_node->next,destID,weight);
     }
+
+}
+
+void insert_node_cmd(pnode *head){
+
 
 }
 void delete_node_cmd(pnode *head){
