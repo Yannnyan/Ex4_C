@@ -57,6 +57,13 @@ void deleteGraph_cmd(pnode* head){
 
 }
 void shortsPath_cmd(pnode head){
+    int **matrix;
+    int n = get_size();
+    matrix = (int **)malloc(sizeof(int) * n * n);
+    int *keyToIndex = malloc(sizeof(int) * n);
+    pnode cur_node = head;
+    pedge cur_edge;
+    
 
 
 }
