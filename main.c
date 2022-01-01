@@ -33,6 +33,7 @@ while(func != EOF){
         printGraph_cmd(head);
     }else if(func=='S'){
         head = getHead();
+        printGraph_cmd(head);
         shortsPath_cmd(head);
     }else if(func=='T'){
         head = getHead();

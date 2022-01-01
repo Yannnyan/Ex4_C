@@ -31,4 +31,5 @@ int insert_edge(pnode head,pnode current_node);
 void insert_edges_to_node(pnode * head);
 void set_size(int s);
 void create_list();
+int dijkstra(int src, int dest, int ** matrix, int size);
 #endif
