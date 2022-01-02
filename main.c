@@ -46,6 +46,7 @@ while(func != EOF){
             return 0;
         }
         printGraph_cmd(head);
+        deleteGraph_cmd(&head);
         return 1;
     }
     /*

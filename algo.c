@@ -37,7 +37,7 @@ void relax(int *distance_from_src, int **matrix, int node_id,int size){
  determines the minimal distance from src to dest.
  the matrix is a neighbor matrix nxn(when n is the length of the matrix and the heigh of the matrix).
 */
-int dijkstra(int src, int dest, int **matrix,int size){
+int *dijkstra(int src, int **matrix,int size){
     printf("Dijkstra: \n");
     int *distance_from_src = (int *) malloc(size * sizeof(int));
     // the start node is 0 and all other nodes are infinity
@@ -60,12 +60,13 @@ int dijkstra(int src, int dest, int **matrix,int size){
         relax(distance_from_src,matrix,min_id,size);
         printdistances(distance_from_src,size);
     }
-    if(distance_from_src[dest] ==  __INT_MAX__){
-        return -1;
-    }
-    return distance_from_src[dest];
+    free(Queue_wannabe);
+    return distance_from_src;
 }
 
+int TSP(int ** matrix){
+   
 
-
+return 1;
+}
 

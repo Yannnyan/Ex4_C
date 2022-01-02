@@ -52,8 +52,23 @@ void printGraph_cmd(pnode head){
     }    
 }
 void deleteGraph_cmd(pnode* head){
+    pnode current_node = *head;
+    pedge current_edge, next_edge;
+    while(current_node != (pnode)NULL){
+        // delete the edges
+        next_edge = current_node->edges;
+        if(next_edge != (pedge)NULL)
+        do{
+            current_edge = next_edge;
+            next_edge = next_edge->next;
+            free(current_edge);
 
-
+        }while(next_edge != (pedge)NULL);
+        // delete the node
+        *head = current_node->next;
+        free(current_node);
+        current_node = *head;
+    }
 
 }
 
@@ -82,8 +97,9 @@ void printMatrix(int ** matrix, int n){
         printf("\n");
     }
 }
-void shortsPath_cmd(pnode head){
-    int **matrix;
+
+int *shortPath(int src, int dest, pnode head , int ignore_dest){
+     int **matrix;
     int n = size_nodes();
     printf("Shortest Path:\n");
     printf("malloc matrix with n= %d\n", n);
@@ -126,19 +142,49 @@ void shortsPath_cmd(pnode head){
     }
     printf("printing matrix:\n");
     printMatrix(matrix,n);
+    src = findById(keyToIndex,n,src);
+    dest = findById(keyToIndex,n,dest);
+    int *path_dist = dijkstra(src,matrix, n);
+    if(!ignore_dest)
+        printf("distance from node %d, to node %d, is : %d\n",keyToIndex[src][1], keyToIndex[dest][1], path_dist[dest]);
+    for(int i=0; i< n; i++){
+        free(matrix[i]);
+        free(keyToIndex[i]);
+    }
+    free(matrix);
+    free(keyToIndex);
+    return path_dist;
+}
+void shortsPath_cmd(pnode head){
+   
     int src,dest;
     scanf("%d",&src);
     scanf("%d",&dest);
     printf("got src: %d, dest: %d",src,dest);
-    src = findById(keyToIndex,n,src);
-    dest = findById(keyToIndex,n,dest);
-    printf("got index src: %d, index dest: %d\n",src,dest);
-    printf("distance from node %d, to node %d, is : %d\n",src, dest, dijkstra(src,dest,matrix, n));
+    int * dists = shortPath(src,dest,head,0);
+    //printf("%d",dists[dest]);
+    free(dists);
+    
 }
 
 void TSP_cmd(pnode head){
-
-
+    int k;
+    scanf("%d",&k);
+    // value all the cities given
+    int *nodes_neighbors = (int  *)malloc(k *sizeof(int));
+    for(int i=0; i< k ; i++){
+        scanf("%d",(nodes_neighbors+i));
+    }
+    int * dist_fori = (int *)malloc(sizeof(int) * k);
+    int ** dist = (int **) malloc(sizeof(int*) * k);
+    // calc the distance between each node to all other nodes
+    for(int i=0; i<k; i++){
+        dist_fori = shortPath(nodes_neighbors[i],-1,head,1);
+        for(int j=0; j < k; j++){
+            dist[i][j] = dist_fori[j];
+        }
+    }
+    // call Tsp Algorithm from algo.c
 
 }
 
