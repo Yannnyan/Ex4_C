@@ -32,4 +32,6 @@ void insert_edges_to_node(pnode * head);
 void set_size(int s);
 void create_list();
 int *dijkstra(int src, int ** matrix, int size);
+void printMatrix(int ** matrix, int n);
+int TSP(int ** matrix, int *cities_to_visit, int size, int size_mat);
 #endif

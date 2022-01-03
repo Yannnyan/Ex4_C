@@ -102,7 +102,7 @@ int *shortPath(int src, int dest, pnode head , int ignore_dest){
      int **matrix;
     int n = size_nodes();
     printf("Shortest Path:\n");
-    printf("malloc matrix with n= %d\n", n);
+    // printf("malloc matrix with n= %d\n", n);
     matrix = (int **)malloc(sizeof(int *) * n);
     int *temp;
     for(int i=0; i< n; i++){
@@ -112,7 +112,7 @@ int *shortPath(int src, int dest, pnode head , int ignore_dest){
             matrix[i][j] = -1;
         }
     }
-    printf("malloc keytoindex, head is : %d\n",head->node_num);
+    // printf("malloc keytoindex, head is : %d\n",head->node_num);
     int **keyToIndex = malloc(sizeof(int *) * n);
     pnode cur_node = head;
     pedge cur_edge;
@@ -127,7 +127,7 @@ int *shortPath(int src, int dest, pnode head , int ignore_dest){
         cur_node = cur_node->next;
     }
     printKeyToIndex(keyToIndex,n);
-    printf("initializing matrix\n");
+    // printf("initializing matrix\n");
     // init matrix
     cur_node = head;
     int j;
@@ -140,20 +140,34 @@ int *shortPath(int src, int dest, pnode head , int ignore_dest){
         }
         cur_node = cur_node->next;
     }
-    printf("printing matrix:\n");
+    // printf("printing matrix:\n");
     printMatrix(matrix,n);
     src = findById(keyToIndex,n,src);
     dest = findById(keyToIndex,n,dest);
     int *path_dist = dijkstra(src,matrix, n);
     if(!ignore_dest)
         printf("distance from node %d, to node %d, is : %d\n",keyToIndex[src][1], keyToIndex[dest][1], path_dist[dest]);
+    int maxId = 0;
+    // trying to allocate a matrix which has all the ids and put the weights there
+    // get the size of the matrix by the maximum id
+    for(int i= 0; i< n; i++){
+        if(keyToIndex[i][1] > maxId){
+            maxId = keyToIndex[i][1];
+        }
+    }
+    int *distsByID = (int *)malloc(sizeof(int) * (maxId + 1));
+    for(int i=0; i< n; i++){
+        distsByID[keyToIndex[i][1]] = path_dist[i];
+    }
     for(int i=0; i< n; i++){
         free(matrix[i]);
         free(keyToIndex[i]);
     }
+    
     free(matrix);
     free(keyToIndex);
-    return path_dist;
+    free(path_dist);
+    return distsByID;
 }
 void shortsPath_cmd(pnode head){
    
@@ -175,16 +189,20 @@ void TSP_cmd(pnode head){
     for(int i=0; i< k ; i++){
         scanf("%d",(nodes_neighbors+i));
     }
-    int * dist_fori = (int *)malloc(sizeof(int) * k);
-    int ** dist = (int **) malloc(sizeof(int*) * k);
+    int * dist_fori;
+    int ** dist = (int **) malloc(sizeof(int*) * size_nodes());
     // calc the distance between each node to all other nodes
-    for(int i=0; i<k; i++){
-        dist_fori = shortPath(nodes_neighbors[i],-1,head,1);
-        for(int j=0; j < k; j++){
-            dist[i][j] = dist_fori[j];
-        }
+    for(int i=0; i<size_nodes(); i++){
+        dist_fori = shortPath(i,-1,head,1);
+        dist[i] = dist_fori;
     }
     // call Tsp Algorithm from algo.c
-
+    TSP(dist, nodes_neighbors, k, size_nodes());
+    // free all the memory stored in nodes_neighbors and dist
+    free(nodes_neighbors);
+    for(int i=0; i<size_nodes(); i++){
+        free(dist[i]);
+    }
+    free(dist);
 }
 
