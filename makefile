@@ -13,6 +13,8 @@ edges: edges.o main.o nodes.o
 	gcc -o edges edges.o nodes.o main.o $(LDFLAGS)
 Graph: Graph.o main.o edges.o nodes.o
 	gcc -o Graph Graph.o edges.o nodes.o $(LDFLAGS)
+testing: testing.o
+	gcc -o testing testing.o $(LDFLAGS)
 #compile
 edges.o: edges.c graph.h
 	gcc -c $(CCFLAGS) edges.c graph.h
@@ -24,6 +26,8 @@ main.o: main.c graph.h
 	gcc -c $(CCFLAGS) main.c graph.h
 algo.o: algo.c graph.h
 	gcc -c $(CCFLAGS) algo.c main.c graph.h
+testing.o: testing.c graph.h
+	gcc -c $(CCFLAGS) testing.c graph.h
 #clean
 .PHONY: clean
 clean:

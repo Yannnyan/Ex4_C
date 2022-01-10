@@ -23,15 +23,8 @@ void printGraph_cmd(pnode head); //for self debug
 void deleteGraph_cmd(pnode* head);
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
+void insert_node_b_cmd(pnode *head);
 
-pnode getHead();
-int size_nodes();
-int delete_all_edges(pnode head);
-int insert_edge(pnode head,pnode current_node);
-void insert_edges_to_node(pnode * head);
-void set_size(int s);
-void create_list();
-int *dijkstra(int src, int ** matrix, int size);
-void printMatrix(int ** matrix, int n);
-int TSP(int ** matrix, int *cities_to_visit, int size, int size_mat);
+pnode* init_graph(int size);
+void insert_edges_to_node(pnode *head, pnode work_node);
 #endif

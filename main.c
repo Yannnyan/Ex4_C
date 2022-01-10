@@ -1,62 +1,44 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "graph.h"
-typedef enum bool {
-    True=1,
-    False=0
-}bool;
+
 
 int main(){
-printf("Starting program!\n");
-bool graph_exist = False;
-char func='0';
 pnode head;
-while(func != EOF){
-    func=getchar();
-    if (func=='A'){
-        printf("Got an A\n");
-        if(graph_exist){
-            head = getHead();
-            deleteGraph_cmd(&head);
-        }
-        build_graph_cmd(&head);
-        graph_exist=True;
-    }else if(func=='B'){
-        head = getHead();
-        insert_node_cmd(&head);
-        
-    }else if(func=='D'){
-        head = getHead();
-        printGraph_cmd(head);
-        delete_node_cmd(&head);
-        head = getHead();
-        printGraph_cmd(head);
-    }else if(func=='S'){
-        head = getHead();
-        printGraph_cmd(head);
-        shortsPath_cmd(head);
-    }else if(func=='T'){
-        head = getHead();
-        TSP_cmd(head);
+int flag=1, size;
+int graph_built = 0;
+char next;
+
+while(flag != EOF && flag == 1){
+    flag = scanf(" %c",&next);
+    if(flag == EOF) break;
+    switch(next){
+        case 'A':
+            if(graph_built == 1){
+                deleteGraph_cmd(&head);
+            }
+            flag = scanf(" %d",&size);
+            head = *(init_graph(size));
+            build_graph_cmd(&head);
+            graph_built = 1;
+            break;
+        case 'B':
+            insert_node_b_cmd(&head);
+            break;
+        case 'D':
+            printGraph_cmd(head);
+            delete_node_cmd(&head);
+            break;
+        case 'S':
+            shortsPath_cmd(head);
+            break;
+        case 'T':
+            TSP_cmd(head);
+            break;
     }
-    else if(func == 'Q'){
-        head = getHead();
-        if(head == (pnode) NULL){
-            printf("head is null !\n");
-            return 0;
-        }
-        printGraph_cmd(head);
-        deleteGraph_cmd(&head);
-        return 1;
-    }
-    /*
-    else {
-        printGraph_cmd();
-    }
-    */
 }
-return 1;
+printGraph_cmd(head);
+deleteGraph_cmd(&head);
+return 0;
+
 }
-
-
-
